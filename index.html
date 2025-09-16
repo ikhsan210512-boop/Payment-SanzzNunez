@@ -1,0 +1,164 @@
+<!doctype html>
+
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Payment SanzzNunez</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent1:#8b5cf6; /* purple */
+      --accent2:#06b6d4; /* teal */
+      --glass: rgba(255,255,255,0.04);
+      color-scheme: dark;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      background: radial-gradient(1000px 400px at 10% 10%, rgba(139,92,246,0.12), transparent),
+                  radial-gradient(900px 350px at 90% 90%, rgba(6,182,212,0.06), transparent),
+                  var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      -webkit-font-smoothing:antialiased;
+    }
+    .wrap{
+      width:100%;
+      max-width:880px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:18px;
+      padding:28px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .logo{
+      width:64px;height:64px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:20px;
+      box-shadow: 0 6px 18px rgba(11,18,32,0.6), inset 0 -6px 18px rgba(255,255,255,0.06);
+    }
+    h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-0.3px;color:#fff}
+    p.subtitle{margin:0;color:rgba(255,255,255,0.65);font-size:13px}.grid{
+  display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start;
+}
+@media (max-width:780px){
+  .grid{grid-template-columns:1fr;}
+  .right{order:-1}
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px);
+}
+.payment-item{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:var(--glass);margin-bottom:12px}
+.left{display:flex;gap:12px;align-items:center}
+.icon{width:48px;height:48px;border-radius:8px;display:grid;place-items:center;font-weight:700;color:white}
+.icon.dana{background:linear-gradient(135deg,#ff6b6b,#ffb86b)}
+.method-title{font-weight:700;color:#fff}
+.method-sub{font-size:13px;color:rgba(255,255,255,0.75)}
+.number{font-family:monospace;font-weight:700;letter-spacing:1px}
+
+.actions{display:flex;gap:10px}
+button{cursor:pointer;padding:8px 12px;border-radius:10px;border:0;font-weight:700}
+.btn-copy{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));color:var(--accent2);border:1px solid rgba(255,255,255,0.04)}
+.btn-open{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white}
+
+.qris-wrap{text-align:center}
+.qris-img{width:100%;max-width:280px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 20px rgba(2,6,23,0.6);display:inline-block;background:#0b1220}
+.hint{font-size:13px;color:rgba(255,255,255,0.6);margin-top:8px}
+
+.footer{margin-top:16px;font-size:13px;color:rgba(255,255,255,0.6);display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:700;color:rgba(255,255,255,0.9)}
+
+.logo{animation:logoPulse 6s ease-in-out infinite}
+@keyframes logoPulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+
+button:focus{outline:3px solid rgba(99,102,241,0.16)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <div class="logo" aria-hidden>SN</div>
+      <div>
+        <h1>Payment SanzzNunez</h1>
+        <p class="subtitle">Pilih metode pembayaran — cepat &amp; aman</p>
+      </div>
+    </header><div class="grid">
+  <div class="card left-col">
+    <h2 style="color:white;margin:0 0 12px 0;font-size:16px">Metode Pembayaran</h2>
+
+    <div class="payment-item" id="dana">
+      <div class="left">
+        <div class="icon dana" aria-hidden>D</div>
+        <div>
+          <div class="method-title">DANA</div>
+          <div class="method-sub">Kirim ke nomor</div>
+          <div class="number" id="dana-number">088985371194</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn-copy" onclick="copyNumber('088985371194')" aria-label="Salin nomor DANA">SALIN</button>
+        <button class="btn-open" onclick="callNumber('088985371194')" aria-label="Buka di aplikasi pembayaran">BAYAR</button>
+      </div>
+    </div>
+
+    <div class="payment-item" style="align-items:center">
+      <div class="left">
+        <div class="icon" style="background:linear-gradient(135deg,#f97316,#f59e0b)" aria-hidden>Q</div>
+        <div>
+          <div class="method-title">QRIS</div>
+          <div class="method-sub">Scan QR di samping atau buka link</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn-open" onclick="openQris()" aria-label="Buka QRIS di tab baru">Lihat QR</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="brand">SanzzNunez</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.55)">Terima kasih atas kepercayaanmu 🙏</div>
+    </div>
+  </div>
+
+  <aside class="card right qris-wrap">
+    <h3 style="color:white;margin-top:0">QRIS (Scan)</h3>
+    <a id="qris-link" href="https://photos.app.goo.gl/psFzHCcNdocMZDV98" target="_blank" rel="noopener noreferrer">
+      <img class="qris-img" id="qris-img" src="https://i.postimg.cc/15LR3cN3/Screenshot-2025-09-16-17-52-14-174-edit-id-dana.jpg" alt="QRIS SanzzNunez"/>
+    </a>
+    <p class="hint">Gambar QRIS di atas hanyalah placeholder. Ganti link <code>src</code> dengan URL gambar QRIS asli Anda.</p>
+  </aside>
+</div>
+
+  </div>  <script>
+    function copyNumber(n){
+      if(!navigator.clipboard){
+        const ta = document.createElement('textarea'); ta.value = n; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy')}catch(e){} ta.remove(); alert('Nomor disalin: '+n); return;
+      }
+      navigator.clipboard.writeText(n).then(()=>{alert('Nomor disalin: '+n)},()=>{alert('Gagal menyalin, silakan salin manual: '+n)})
+    }
+    function openQris(){
+      const url = document.getElementById('qris-link').href;
+      window.open(url,'_blank');
+    }
+    function callNumber(n){
+      window.location.href = 'tel:'+n;
+    }
+  </script></body>
+</html>
